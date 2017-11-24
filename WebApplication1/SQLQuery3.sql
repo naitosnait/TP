@@ -1,1 +1,0 @@
-﻿SELECT Tax.name, Category.title, Tax.property, Tax.price FROM Tax, Category WHERE Tax.category = Category.id
