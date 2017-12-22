@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication1.Models.Agency.Agent>
+
+@{
+    ViewBag.Title = "Agent";
+}
+
+<h2>Агент</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Создать", "CreateAgent")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Код
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "EditAgent", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

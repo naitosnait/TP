@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fio" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="account" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Agent__account__4222D4EF" FromRole="Agent" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Contract" Relationship="Self.FK__Contract__agent__4316F928" FromRole="Agent" ToRole="Contract" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Agent" Relationship="Self.FK__Agent__account__4222D4EF" FromRole="AspNetUsers" ToRole="Agent" />
+    <NavigationProperty Name="Insurant" Relationship="Self.FK__Insurant__accoun__398D8EEE" FromRole="AspNetUsers" ToRole="Insurant" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Tax" Relationship="Self.FK__Tax__category__145C0A3F" FromRole="Category" ToRole="Tax" />
+  </EntityType>
+  <EntityType Name="Coef">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="value" Type="Single" Nullable="false" />
+    <NavigationProperty Name="Contract" Relationship="Self.FK__Contract__coef__3E52440B" FromRole="Coef" ToRole="Contract" />
+  </EntityType>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="series" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="number" Type="Int32" Nullable="false" />
+    <Property Name="insurant" Type="Int32" Nullable="false" />
+    <Property Name="agent" Type="Int32" Nullable="false" />
+    <Property Name="tax" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="coef" Type="Int32" Nullable="false" />
+    <Property Name="cost" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Agent1" Relationship="Self.FK__Contract__agent__4316F928" FromRole="Contract" ToRole="Agent" />
+    <NavigationProperty Name="Coef1" Relationship="Self.FK__Contract__coef__3E52440B" FromRole="Contract" ToRole="Coef" />
+    <NavigationProperty Name="Insurant1" Relationship="Self.FK__Contract__insura__3F466844" FromRole="Contract" ToRole="Insurant" />
+    <NavigationProperty Name="Tax1" Relationship="Self.FK__Contract__tax__3D5E1FD2" FromRole="Contract" ToRole="Tax" />
+  </EntityType>
+  <EntityType Name="Insurant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="type" Type="Int32" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="phone" Type="Int32" Nullable="false" />
+    <Property Name="account" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Insurant__accoun__398D8EEE" FromRole="Insurant" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Contract" Relationship="Self.FK__Contract__insura__3F466844" FromRole="Insurant" ToRole="Contract" />
+    <NavigationProperty Name="Type1" Relationship="Self.FK__Insurant__type__38996AB5" FromRole="Insurant" ToRole="Type" />
+  </EntityType>
+  <EntityType Name="Tax">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="category" Type="Int32" Nullable="false" />
+    <Property Name="property" Type="String" MaxLength="500" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Category1" Relationship="Self.FK__Tax__category__145C0A3F" FromRole="Tax" ToRole="Category" />
+    <NavigationProperty Name="Contract" Relationship="Self.FK__Contract__tax__3D5E1FD2" FromRole="Tax" ToRole="Contract" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Insurant" Relationship="Self.FK__Insurant__type__38996AB5" FromRole="Type" ToRole="Insurant" />
+  </EntityType>
+  <Association Name="FK__Agent__account__4222D4EF">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="account" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contract__agent__4316F928">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="agent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Insurant__accoun__398D8EEE">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Insurant" Type="Self.Insurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Insurant">
+        <PropertyRef Name="account" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tax__category__145C0A3F">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Tax" Type="Self.Tax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tax">
+        <PropertyRef Name="category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contract__coef__3E52440B">
+    <End Role="Coef" Type="Self.Coef" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Coef">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="coef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contract__insura__3F466844">
+    <End Role="Insurant" Type="Self.Insurant" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Insurant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="insurant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contract__tax__3D5E1FD2">
+    <End Role="Tax" Type="Self.Tax" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tax">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="tax" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Insurant__type__38996AB5">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="Insurant" Type="Self.Insurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Insurant">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="AgencyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agent" EntityType="Self.Agent" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="Coef" EntityType="Self.Coef" />
+    <EntitySet Name="Contract" EntityType="Self.Contract" />
+    <EntitySet Name="Insurant" EntityType="Self.Insurant" />
+    <EntitySet Name="Tax" EntityType="Self.Tax" />
+    <EntitySet Name="Type" EntityType="Self.Type" />
+    <AssociationSet Name="FK__Agent__account__4222D4EF" Association="Self.FK__Agent__account__4222D4EF">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Agent" EntitySet="Agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contract__agent__4316F928" Association="Self.FK__Contract__agent__4316F928">
+      <End Role="Agent" EntitySet="Agent" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Insurant__accoun__398D8EEE" Association="Self.FK__Insurant__accoun__398D8EEE">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Insurant" EntitySet="Insurant" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tax__category__145C0A3F" Association="Self.FK__Tax__category__145C0A3F">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Tax" EntitySet="Tax" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contract__coef__3E52440B" Association="Self.FK__Contract__coef__3E52440B">
+      <End Role="Coef" EntitySet="Coef" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contract__insura__3F466844" Association="Self.FK__Contract__insura__3F466844">
+      <End Role="Insurant" EntitySet="Insurant" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contract__tax__3D5E1FD2" Association="Self.FK__Contract__tax__3D5E1FD2">
+      <End Role="Tax" EntitySet="Tax" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Insurant__type__38996AB5" Association="Self.FK__Insurant__type__38996AB5">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Insurant" EntitySet="Insurant" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebApplication1.Models.Agency.Tax>
+
+@{
+    ViewBag.Title = "Tax";
+}
+
+<h2>Tax</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Создать новый тариф", "CreateTax")
+    </p>
+}
+
+
+@foreach (var item in Model)
+{
+    <h1>
+        @Html.DisplayFor(modelItem => item.name)
+    </h1>
+    <p>
+        @item.Category1.title
+    </p>
+    <p>
+        @Html.DisplayFor(modelItem => item.property)
+    </p>
+    <h3>
+        @Html.DisplayFor(modelItem => item.price)
+    </h3>
+
+    if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Редактировать", "EditTax", new { id = item.id })
+        </p>
+     }
+ }
+

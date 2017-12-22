@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebApplication1.Models.Agency.InsuranceCase>
+
+@{
+    ViewBag.Title = "InsuranceCase";
+}
+
+<h2>InsuranceCase</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Договор (серия и нормер)
+        </th>
+        <th>
+            Описание
+        </th>
+        <th>
+            Страхователь
+        </th>
+        <th>
+            Номер телефона
+        </th>
+        <th>
+            Дата регистрации заявки
+        </th>
+        <th>
+            Дата окончания заявки
+        </th>
+        <th>
+            Статус
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.contract)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @item.Insurant1.name
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datestart, "Date")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datestop, "Date")
+        </td>
+        <td>
+            @item.Status1.title
+        </td>
+        @if (User.IsInRole("Admin") || User.IsInRole("Agent"))
+        {
+            <td>
+                @Html.ActionLink("Изменить статус и дату окончания", "StatusEdit", new { id = item.id }) |
+                @Html.ActionLink("Редактировать", "EditCase", new { id = item.id })
+            </td>
+        }
+    </tr>
+}
+
+</table>

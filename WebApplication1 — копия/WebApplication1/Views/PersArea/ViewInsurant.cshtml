@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Models.Agency.Insurant
+
+@{
+    ViewBag.Title = "Insurant";
+}
+
+<h2>Страхователь</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Название/ФИО
+        </th>
+        <th>
+            Тип
+        </th>
+        <th>
+            Адрес
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.name)
+        </td>
+        <td>
+            @Model.Type1.title
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.phone)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "EditInsurant", new { id = Model.id })
+        </td>
+    </tr>
+</table>

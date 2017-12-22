@@ -1,0 +1,32 @@
+﻿@model WebApplication1.Models.Agency.Agent
+
+@{
+    ViewBag.Title = "ViewAgent";
+}
+
+<h2>ViewAgent</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Код
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.fio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.code)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "AgentEdit", new { id= Model.id })
+        </td>
+    </tr>
+
+</table>
